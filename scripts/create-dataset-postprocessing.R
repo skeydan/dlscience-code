@@ -9,7 +9,7 @@ y_val <- np$load("/home/key/code/dlscience-code/data/y_val_pre.npy")
 y_test <- np$load("/home/key/code/dlscience-code/data/y_test_pre.npy")
 
 ##############################   Original input  ##############################
-# forecast reference time (unix timestamp)   --- not to be used as predictor
+# forecast reference time (unix timestamp)   --- purely informational
 # station id
 # air temperature ensemble average           --- also a target variable
 # dew-point temperature ensemble average     --- also a target variable
@@ -24,9 +24,9 @@ y_test <- np$load("/home/key/code/dlscience-code/data/y_test_pre.npy")
 # sine component of the day of the year
 
 ##############################   Original target ##############################
-# forecast reference time (unix timestamp)   --- not to be included in target
-# station id
-# forecast lead time
+# forecast reference time (unix timestamp)   --- purely informational
+# station id                                 --- not to be included in final target
+# forecast lead time                         --- not to be included in final target
 # 2m air_temperature
 # 2m dew_point_temperature
 # 2m surface_air_pressure
