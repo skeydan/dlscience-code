@@ -24,7 +24,7 @@ y_test <- np$load("/home/key/code/dlscience-code/data/y_test_pre.npy")
 # sine component of the day of the year
 
 ##############################   Original target ##############################
-# forecast reference time (unix timestamp)   --- not to be used as predictor
+# forecast reference time (unix timestamp)   --- not to be included in target
 # station id
 # forecast lead time
 # 2m air_temperature
@@ -61,9 +61,9 @@ x_test_proc <- cbind(x_test[ , 1:2],
                scale(x_test[ , 10:13], center = means[7:10], scale = sds[7:10])
 )
 
-saveRDS(x_train, "/home/key/code/dlscience-code/data/x_train.rds")
-saveRDS(x_val, "/home/key/code/dlscience-code/data/x_val.rds")
-saveRDS(x_test, "/home/key/code/dlscience-code/data/x_test.rds")
+saveRDS(x_train_proc, "/home/key/code/dlscience-code/data/x_train.rds")
+saveRDS(x_val_proc, "/home/key/code/dlscience-code/data/x_val.rds")
+saveRDS(x_test_proc, "/home/key/code/dlscience-code/data/x_test.rds")
 saveRDS(y_train, "/home/key/code/dlscience-code/data/y_train.rds")
 saveRDS(y_val, "/home/key/code/dlscience-code/data/y_val.rds")
 saveRDS(y_test, "/home/key/code/dlscience-code/data/y_test.rds")
