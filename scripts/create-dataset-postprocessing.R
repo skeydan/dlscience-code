@@ -17,7 +17,7 @@ y_test <- np$load("/home/key/code/dlscience-code/data/y_test_pre.npy")
 # surface air pressure ensemble average      --- also a target variable
 # relative humidity ensemble average         --- also a target variable
 # water vapor mixing ratio ensemble average  --- also a target variable
-# forecast lead time                         --- to be moved to pos. 2 in dataset
+# forecast lead time                         --- to be moved to pos. 3 in dataset
 # cosine component of hour of the day
 # sine component of hour of the day
 # cosine component of day of the year
