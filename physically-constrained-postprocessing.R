@@ -23,8 +23,8 @@ library(torch)
 
 ### Forecast reference time (forecast_time) (supplementary information) ###
 
-tbd_dataset <- torch::dataset(
-  "tbd",
+physical_postprocessing_dataset <- torch::dataset(
+  "physical_postprocessing_dataset",
   initialize = function(root, split = "train", download = FALSE, ...,
                         transform = NULL, target_transform = NULL) {
     data_path <- "~/code/dlscience-code/data/"
@@ -56,7 +56,24 @@ train_ds[1000]
 train_dl <- dataloader(train_ds, batch_size = 1024, shuffle = TRUE)
 train_dl
 
-# TBD explain
+
+### Physical constraints ###
+#
+# https://arxiv.org/pdf/2212.04487.pdf
+#
+# Constraints are formulated on relative humidity and mixing ratio, but really involve
+# 2 variables not present in the dataset:
+#   water vapor pressure (e), and
+#   saturation water vapor pressure (e_s).
+#
+# The relevant equations are:
+#   (5) e = c exp((a * T_d)(b + T_d)) and e_s = c exp((a * T)(b + T)), where T_d is the
+#       dew point temperature, and a,b,c and constants (defined as is practice at Meteo Swiss).
+#       These formulae directly yield constraint (1), formulated as (6)/(4a, resp.):
+#       RH = e/e_s * 100 = exp((a * T_d)(b + T_d)/(a * T)(b + T)) where RH is relative humidity.
+#   (7) r = 1000 * (0.622 * e)/(p - e) where r is water vapor mixing ratio. This yields (4b).
+#
+
 physics_layer <- nn_module(
   forward = function(x) {
     t <- x[ , 1]
